@@ -4,7 +4,12 @@
 
 let ApiQuotes = []
 
-
+// new function added to randomise the quote.
+function randomiseQuote()  {
+    // New variable created to stored randomised quote. Math.random finds a random number. wrapped in Math.floor as this ensures theres no decimal it rounds down to the nearest whole number/integer. wrappred in square brackets as we are finding the index of the ApiQuotes array. multiply by length of apiQuotes array so that it will never be higher than the length of the array.
+    const randomQuote = ApiQuotes[Math.floor(Math.random() * ApiQuotes.length)]
+    console.log(randomQuote)
+}
 
 async function fetchQuotes() {
     // API URL stored in variable.
@@ -15,8 +20,7 @@ async function fetchQuotes() {
         const response = await fetch(apiURL)
         // response turned into json so data can be read.
         ApiQuotes = await response.json()
-        // console log to check that it is working.
-        console.log(ApiQuotes)
+        randomiseQuote()
 
     } catch (error) {
 
