@@ -40,6 +40,14 @@ function newQuote()  {
 
 }
 
+function tweetQuote() {
+    const twitterURL = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${quoteAuthor.textContent}`
+    window.open(twitterURL, '_blank')
+}
+
+twitterBtn.addEventListener("click", tweetQuote)
+quoteBtn.addEventListener("click", newQuote)
+
 
 
 async function fetchQuotes() {
