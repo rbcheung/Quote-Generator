@@ -40,7 +40,9 @@ function newQuote()  {
 
 }
 
+// New function added to tweet selected quotes.
 function tweetQuote() {
+    // variable stores the twitter url. back ticks used to pass variables into template string. ? after tweet used to show that we are parsing variables. window.open allows a new window to be opened with twitterURL.
     const twitterURL = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${quoteAuthor.textContent}`
     window.open(twitterURL, '_blank')
 }
