@@ -3,20 +3,41 @@
 // Selecting HTML elements using document.getElementById.
 
 const quoteText = document.getElementById("quote-text")
-console.log(quoteText)
+// console.log(quoteText)
 const quoteAuthor = document.getElementById("quote-author")
-console.log(quoteAuthor)
+// console.log(quoteAuthor)
 const twitterBtn = document.getElementById("twitter-button")
-console.log(twitterBtn)
+// console.log(twitterBtn)
 const quoteBtn = document.getElementById("quote-button")
-console.log(quoteBtn)
+// console.log(quoteBtn)
+const loader = document.getElementById("loader")
+// console.log(loader)
+const quoteContainer = document.getElementById("quote-container")
 
 // Global variable created so that the response can be put into an empty string and used by the fetchQuotes function. I have used let because the data in the array will change.
 
 let ApiQuotes = []
 
+// Loading function to show loading.
+
+function loading() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+
+// Hide Loading 
+
+function hiding() {
+    loader.hidden = true;
+    quoteContainer.hidden = false;
+}
+
 // new function added to randomise the quote and populate page correctly.
 function newQuote()  {
+
+    // calling the loading function
+
+    loading();
     // New variable created to stored randomised quote. Math.random finds a random number. wrapped in Math.floor as this ensures theres no decimal it rounds down to the nearest whole number/integer. wrappred in square brackets as we are finding the index of the ApiQuotes array. multiply by length of apiQuotes array so that it will never be higher than the length of the array.
     const randomQuote = ApiQuotes[Math.floor(Math.random() * ApiQuotes.length)]
     console.log(randomQuote)
@@ -33,9 +54,14 @@ function newQuote()  {
     if (randomQuote.text.length > 120)  {
         quoteText.classList.add("long-quote")
     } 
+    
+    // code below changes the text content of the variables to be whatever is in the randomquote array.
 
-    quoteText.textContent = randomQuote.text
-    quoteAuthor.textContent = randomQuote.author
+    quoteText.textContent = randomQuote.text;
+    quoteAuthor.textContent = randomQuote.author;
+
+    hiding();
+
 
 
 }
@@ -53,6 +79,7 @@ quoteBtn.addEventListener("click", newQuote)
 
 
 async function fetchQuotes() {
+    loading();
     // API URL stored in variable.
     const apiURL = "https://jacintodesign.github.io/quotes-api/data/quotes.json"
     // try catch allows us to attempt a fetch request. If it doesnt work we can catch the error and do something with it.
